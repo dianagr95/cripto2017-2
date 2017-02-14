@@ -21,19 +21,16 @@ def main(args):
     #Ejercicio 1-a
     
     dataR = xor.xor_()
-    print(dataR)
     fileM.saveFile(file_name1,dataR)
 
     #Ejercicio 1-b
     
     dataR = xor.multiplicacion_()
-    print(dataR)
     fileM.saveFile(file_name2,dataR)
     
     #Ejercicio 1-c
     
     dataR = xor.poli_()
-    print(dataR)
     fileM.saveFile(file_name3,dataR)
     
 if __name__ == "__main__":
