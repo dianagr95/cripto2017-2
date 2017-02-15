@@ -5,4 +5,4 @@ Para ejecutar el programa deben en la terminal de linux usar el comando:
 
     python bytes.py archivoA archivoB
     
-
+Vilchis Salazar Jose Antonio
