@@ -12,16 +12,19 @@ file_name3 = "multiplicacion_poli.out"
 def main(args):
     fileM = FileManager()
     
-    data1 = fileM.loadFile(args[0])
+    data1 = fileM.loadFileBytes(args[0])
 
-    data2 = fileM.loadFile(args[1])
+    data2 = fileM.loadFileBytes(args[1])
+    
+    print(data1)
+    print(data2)
     
     xor = XOR(data1,data2)
     
     #Ejercicio 1-a
     
     dataR = xor.xor_()
-    fileM.saveFile(file_name1,dataR)
+    fileM.saveFileBytes(file_name1,dataR)
 
     #Ejercicio 1-b
     
