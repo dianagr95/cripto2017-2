@@ -8,71 +8,62 @@ class XOR:
     def __init__(self, A, B):
         self.A = A
         self.B = B
-        self.relleno = "bettlejuice"
+        self.relleno = "beetlejuice"
+        self.xAA = 170
+        self.x03010102 = "??"
     
-    def emparejar(self):
-        A = self.A[:-1]
-        B = self.B[:-1]
+    def emparejar(self,auxA,auxB):
+        A = bytearray()
+        B = bytearray()
+        for a in auxA:
+            A.append(a)
+        for b in auxB:
+            B.append(b)
+        relleno = bytearray(self.relleno,"utf-8") 
         diff = len(A) - len(B)
-        s = len(self.relleno)
+        s = len(relleno)
         index = 0
         while(diff != 0):
             if diff < 0:
                 if diff + s < 0:
-                    A = A + self.relleno
+                    A = A + relleno
                 else:
-                    A = A + self.relleno[index]
-                    index = index + 1
+                    A = A + relleno[:diff%s]
             else:
                 if diff - s > 0:
-                    B = B + self.relleno
+                    B = B + relleno
                 else:
-                    B = B + self.relleno[index]
-                    index = index + 1
+                    B = B + relleno[:diff%s]
             diff = len(A) - len(B)
         print(diff)
-        return A+self.A[-1],B+self.B[-1]
-    
-    def toInt(self,string):
-        A = []
-        size = len(string)
-        i = 0
-        while i < size:
-            A.append(ord(string[i]))
-            i = i + 1
-        A = np.array(A)
-        return A
-            
-    def toString(self,array):
-        s = ""
-        size = array.shape[0]
-        i = 0
-        while i < (size):
-            s = s + chr(array[i])
-            i = i + 1
-        return s
+        return A,B
+
+    def xor_test(self):
+        A = bytearray(self.A)
+        size = len(A)
+        C = bytearray(size)
+        for i in xrange(size):
+            C[i] = A[i] ^ 0
+        return C
     
     def xor_(self):
-        A, B = self.emparejar()
-        A = bytearray(A)
-        B = bytearray(B)
+        A = bytearray(self.A)
+        B = bytearray(self.B)
+        A, B = self.emparejar(A,B)
         size = len(A)
         C = bytearray(size)
         for i in xrange(size):
             C[i] = A[i] ^ B[i]
         return C
     
-    def xor_dep(self):
-        A, B = self.emparejar()
-        A = self.toInt(A)
-        B = self.toInt(B)
-        C = A ^ B
-        C = self.toString(C)
-        print(len(A))
-        return C
-        
     def multiplicacion_(self):
-        return "WUT"
+        A = bytearray(self.A)
+        size = len(A)
+        print(type(A[0]))
+        C = bytearray(size)
+        for i in xrange(size):
+            C[i] = A[i]
+        return "WUt"
         
     def poli_(self):
         return "WUT"
