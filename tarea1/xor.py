@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import numpy as np
+import sys
 
 class XOR:
     
@@ -53,10 +54,21 @@ class XOR:
     
     def xor_(self):
         A, B = self.emparejar()
+        A = bytearray(A)
+        B = bytearray(B)
+        size = len(A)
+        C = bytearray(size)
+        for i in xrange(size):
+            C[i] = A[i] ^ B[i]
+        return C
+    
+    def xor_dep(self):
+        A, B = self.emparejar()
         A = self.toInt(A)
         B = self.toInt(B)
         C = A ^ B
         C = self.toString(C)
+        print(len(A))
         return C
         
     def multiplicacion_(self):
