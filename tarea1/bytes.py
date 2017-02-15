@@ -16,9 +16,6 @@ def main(args):
 
     data2 = fileM.loadFileBytes(args[1])
     
-    print(data1)
-    print(data2)
-    
     xor = XOR(data1,data2)
     
     #Ejercicio 1-a
