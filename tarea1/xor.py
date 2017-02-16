@@ -9,9 +9,7 @@ class XOR:
         self.A = A
         self.B = B
         self.relleno = "beetlejuice"
-        self.xAA = 170
-        self.x03010102 = "??"
-    
+        
     def emparejar(self,auxA,auxB):
         A = bytearray()
         B = bytearray()
@@ -38,13 +36,6 @@ class XOR:
         print(diff)
         return A,B
 
-    def xor_test(self):
-        A = bytearray(self.A)
-        size = len(A)
-        C = bytearray(size)
-        for i in xrange(size):
-            C[i] = A[i] ^ 0
-        return C
     
     def xor_(self):
         A = bytearray(self.A)
@@ -55,53 +46,42 @@ class XOR:
         for i in xrange(size):
             C[i] = A[i] ^ B[i]
         return C
-    
-    def multiplicacion_(self):
-        A = bytearray(self.A)
-        size = len(A)
-        print(type(A[0]))
-        C = bytearray(size)
-        for i in xrange(size):
-            C[i] = A[i]
-        return "WUt"
         
-    def poli_(self):
-        return "WUT"
-        
-        def get_grado(self, i):
+            
+    def getGrado(self, i):
         g = 0
         while i > 1:
             i >>= 1
             g += 1
         return g
     
-    def redu(self, a):
-        k = 0
-        g = self.get_grado(a)
+    def mod(self, a):
+        pol = int("100011011",2)
+        g = self.getGrado(a)
         while g >= 8:
             aux = 0
             if a & (1 << g):
                 aux = 1 << g - 8
-            aux = self.mult_aux(self.pol, aux)
+            aux = self.mul(pol, aux)
             a ^= aux
-            g = self.get_grado(a)
+            g = self.getGrado(a)
         return a
     
-    def mult_aux(self, bmult, b):
+    def mul(self, pol, b):
         res = 0
         i = 1
-        for x in range(self.get_grado(bmult) + 1):
-            if bmult & i:
+        grado = self.getGrado(pol) + 1
+        for x in xrange(grado):
+            if pol & i:
                 res ^= b << x
             i <<= 1
         return res
+        
+    def multiplicacion_(self):
+        A = bytearray(self.A)
+        pol = int("AA", 16)
+        C = bytearray()
+        for a in A:
+            C.append(self.mod(self.mul(pol, a)))
+        return C
     
-    def mult(self):
-        bmult = int("AA", 16)
-        res = bytearray()
-        i  = 0
-        for b in self.bytesA:
-            print(str(i) + " Byte origen: " + bin(self.bytesA[i]) + " Byte a muliplicar: " + bin(bmult))
-            res.append(self.redu(self.mult_aux(bmult, b)))
-            i += 1
-        self.escribe_archivo("multiplicacion.out", res)
