@@ -10,12 +10,12 @@ class XOR:
         self.B = B
         self.relleno = "beetlejuice"
         
-    def emparejar(self,auxA,auxB):
+    def emparejar(self,resA,resB):
         A = bytearray()
         B = bytearray()
-        for a in auxA:
+        for a in resA:
             A.append(a)
-        for b in auxB:
+        for b in resB:
             B.append(b)
         relleno = bytearray(self.relleno,"utf-8") 
         diff = len(A) - len(B)
@@ -48,24 +48,24 @@ class XOR:
         return C
         
             
-    def getGrado(self, i):
-        g = 0
-        while i > 1:
-            i >>= 1
-            g += 1
-        return g
+    def getGrado(self, pol):
+        grado = 0
+        while pol > 1:
+            pol = pol >> 1
+            grado = grado + 1
+        return grado
     
-    def mod(self, a):
+    def mod(self, mod):
         pol = int("100011011",2)
-        g = self.getGrado(a)
-        while g >= 8:
-            aux = 0
-            if a & (1 << g):
-                aux = 1 << g - 8
-            aux = self.mul(pol, aux)
-            a ^= aux
-            g = self.getGrado(a)
-        return a
+        grado = self.getGrado(mod)
+        while g > 7:
+            res = 0
+            if mod & (1 << grado):
+                res = 1 << grado - 8
+            res = self.mul(pol, res)
+            mod ^= res
+            grado = self.getGrado(mod)
+        return mod
     
     def mul(self, pol, b):
         res = 0
